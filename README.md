@@ -1,7 +1,7 @@
 # Laporan Proyek Machine Learning - Rizki Dwi Sya'bana Nugraha
 ## Domain Proyek
 
-Domain yang dipilih untuk proyek _machine learning_ ini adalah **Ekonomi dan Bisnis**, dengan judul **Predictive Analytics : Prediksi Harga Properti Rumah di Kota Bandung**
+Domain yang dipilih untuk proyek _machine learning_ ini adalah **Ekonomi dan Bisnis**, dengan judul **Predictive Analytics: Prediksi Harga Properti Rumah di Kota Bandung**
 
 ### Latar Belakang
 
