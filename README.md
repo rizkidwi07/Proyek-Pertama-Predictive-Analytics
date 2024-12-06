@@ -214,8 +214,8 @@ Teknik yang digunakan dalam penyiapan data (Data Preparation) yaitu:
   One hot encoding adalah teknik mengubah data kategorik menjadi data numerik dimana setiap kategori menjadi kolom baru ke dalam vektor biner (nilai 0 atau 1). Fitur yang akan diubah menjadi numerik pada proyek ini adalah kolom `status` dan `location`.
 - Train Test Split Data
   
-  Train test split atau proses membagi data menjadi data latih dan data uji. Data latih akan digunakan untuk membangun model, sedangkan data uji akan digunakan untuk menguji performa model. Pada proyek ini, 80% dataset digunakan untuk melatih model, dan 20% sisanya digunakan untuk mengevaluasi model.
-- Normalization
+  Train test split atau proses membagi data menjadi data latih dan data uji. Data latih akan digunakan untuk membangun model, sedangkan data uji akan digunakan untuk menguji performa model. Pada proyek ini, 90% dataset digunakan untuk melatih model, dan 10% sisanya digunakan untuk mengevaluasi model.
+- Normalisasi
   
   Algoritma machine learning akan memiliki performa lebih baik dan bekerja lebih cepat jika dimodelkan dengan data seragam yang memiliki skala relatif sama. Pada proyek ini proses Standarisasi akan menggunakan StandardScaler.
 
@@ -230,6 +230,7 @@ Teknik yang digunakan dalam penyiapan data (Data Preparation) yaitu:
     + `n_estimators` = Jumlah maksimum estimator di mana boosting dihentikan.
     + `max_depth` = Kedalaman maksimum setiap tree.
     + `random_state` = Mengontrol seed acak yang diberikan pada setiap base_estimator pada setiap iterasi boosting.
+    + `n_jobs` = Jumlah job (pekerjaan) yang digunakan secara paralel untuk mengontrol thread atau proses yang berjalan.
 
   - Adaboost
     AdaBoost juga disebut Adaptive Boosting adalah teknik dalam machine learning dengan metode ensemble.  Algoritma yang paling umum digunakan dengan AdaBoost adalah pohon keputusan (decision trees) satu tingkat yang berarti memiliki pohon Keputusan dengan hanya 1 split. Pohon-pohon ini juga disebut Decision Stumps. Algoritma ini bertujuan untuk meningkatkan performa atau akurasi prediksi dengan cara menggabungkan beberapa model sederhana dan dianggap lemah (weak learners) secara berurutan sehingga membentuk suatu model yang kuat (strong ensemble learner). Proyek ini menggunakan [sklearn.ensemble.AdaBoostRegressor](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.AdaBoostRegressor.html) dengan memasukkan X_train dan y_train dalam membangun model. Parameter yang digunakan pada proyek ini adalah :
@@ -238,11 +239,14 @@ Teknik yang digunakan dalam penyiapan data (Data Preparation) yaitu:
     + `random_state` = Mengontrol seed acak yang diberikan pada setiap base_estimator pada setiap iterasi boosting.
 
 ## Evaluation
-Pada proyek ini, model yang dibuat merupakan kasus klasifikasi dan menggunakan metriks akurasi. Metrik evaluasi yang digunakan pada proyek ini adalah akurasi dan mean squared error (MSE). Akurasi menentukan tingkat kemiripan antara hasil prediksi dengan nilai yang sebenarnya (y_test). Mean squared error (MSE) mengukur error dalam model statistik dengan cara menghitung rata-rata error dari kuadrat hasil aktual dikurang hasil prediksi. Berikut rumus dari MSE :
+Pada proyek ini, model yang dibuat merupakan kasus klasifikasi dan menggunakan metriks akurasi. Metrik evaluasi yang digunakan pada proyek ini adalah akurasi dan mean squared error (MSE). Akurasi menentukan tingkat kemiripan antara hasil prediksi dengan nilai yang sebenarnya (y_test). Mean squared error (MSE) mengukur error dalam model statistik dengan cara menghitung rata-rata error dari kuadrat hasil aktual dikurang hasil prediksi. Berikut rumus dari MSE:
 
 <div><img src="https://github.com/rizkidwi07/Source/blob/main/Screenshot%202024-12-06%20020439.png") width="450"/></div><br />
 
-- Menjelaskan hasil proyek berdasarkan metrik evaluasi
+Berikut hasil evaluasi pada proyek ini:
+<div><img src="https://github.com/rizkidwi07/Source/blob/main/Screenshot%202024-12-07%20000115.png") width="450"/></div><br />
+
+Model Random Forest (RF) memberikan nilai eror yang paling kecil. Sedangkan model dengan algoritma KNN memiliki eror yang paling besar. Sehingga model Random Forest (RF) yang akan kita pilih sebagai model terbaik untuk melakukan prediksi harga rumah di Bandung.
 
 Ingatlah, metrik evaluasi yang digunakan harus sesuai dengan konteks data, problem statement, dan solusi yang diinginkan.
 
