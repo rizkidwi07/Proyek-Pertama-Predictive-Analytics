@@ -41,8 +41,8 @@ Tujuan dari proyek ini adalah:
 ### Solution statements
 - Metodologi pada proyek ini adalah: Membangun model regresi dengan harga properti rumah sebagai target
 - Menggunakan algoritma seperti: K-Nearest Neighbor (KNN), Random Forest, dan Boosting Algorithm
-- Untuk mengukur performa model, digunakan metrik berikut: Mean Squared Error (MSE) atau Root Mean Square Error (RMSE)
-
+- Untuk mengukur performa model, digunakan metrik berikut: Mean Squared Error (MSE)
+  
 ## Data Understanding
 Dataset yang digunakan dalam proyek ini adalah data yang berfokus pada properti perumahan di Bandung, Jawa Barat, Indonesia. Data ini dapat diunduh melalui Kaggle. 
 
