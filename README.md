@@ -219,7 +219,7 @@ Pada proyek ini, model yang dibuat merupakan kasus prediksi harga dan menggunaka
 <div><img src="https://github.com/rizkidwi07/Source/raw/main/Screenshot%202024-12-06%20020439.png") width="450"/></div><br />
 
 Berikut hasil evaluasi pada proyek ini:
-<div><img src="https://github.com/rizkidwi07/Source/blob/main/Screenshot%202024-12-07%20000115.png") width="450"/></div><br />
+<div><img src="https://github.com/rizkidwi07/Source/raw/main/Screenshot%202024-12-07%20000115.png") width="450"/></div><br />
 
 Model Random Forest (RF) memberikan nilai eror yang paling kecil. Sedangkan model dengan algoritma KNN memiliki eror yang paling besar. Sehingga model Random Forest (RF) yang akan kita pilih sebagai model terbaik untuk melakukan prediksi harga rumah di Bandung.
 
