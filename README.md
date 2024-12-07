@@ -5,7 +5,7 @@ Domain yang dipilih untuk proyek _machine learning_ ini adalah **Ekonomi dan Bis
 
 ### Latar Belakang
 
-<div><img src="https://github.com/rizkidwi07/Source/blob/main/harga-rumah-di-ri-jauh-lebih-murah-ketimbang-negara-lain-tapi-tingkat-kepemilikan-rendah-nsw.jpg") width="1000"/></div><br />
+<div><img src="https://github.com/rizkidwi07/Source/raw/main/harga-rumah-di-ri-jauh-lebih-murah-ketimbang-negara-lain-tapi-tingkat-kepemilikan-rendah-nsw.jpg") width="1000"/></div><br />
   
 Pasar properti di Indonesia, khususnya di kota Bandung, mengalami perkembangan yang pesat dalam beberapa tahun terakhir. Dengan meningkatnya urbanisasi dan permintaan perumahan, pemahaman yang lebih baik tentang faktor-faktor yang mempengaruhi harga properti menjadi semakin penting. Namun, informasi harga seringkali sulit diakses dan tidak transparan bagi calon pembeli atau investor.
 
@@ -30,7 +30,7 @@ Bandung Housing Price Dataset yang dikumpulkan melalui web scraping dari situs [
 
 Berdasarkan latar belakang di atas, berikut ini merupakan rincian masalah yang dapat diselesaikan pada proyek ini:
 - Dari serangkaian fitur yang ada, fitur apa yang paling berpengaruh terhadap harga prediksi properti rumah di Bandung?
-- Berapa harga pasar properti rumah di Bandung dengan karakteristik atau fitur tertentu?  
+- Bagaimana memprediksi harga rumah dengan fitur tertentu?  
 
 ### Goals
 
@@ -72,142 +72,114 @@ Usability | 8.82
 - `building_area`: Total luas bangunan properti dalam meter persegi.
 
 **Exploratory Data Analysis**
-<div><img src="https://github.com/rizkidwi07/Source/blob/c13fb0508b43af5d952fb4e85abd7bc1836fabb9/Screenshot%202024-12-06%20003443.png") width="450"/></div><br />
+<div><img src="https://github.com/rizkidwi07/Source/raw/main/Screenshot%202024-12-06%20003443.png") width="450"/></div><br />
 Dari output terlihat bahwa:
 
+- Jumlah data terdiri dari 7.611 baris dan 11 kolom.
 - Terdapat missing value di beberapa kolom, diantaranya pada `status`, `land_area`, dan `building_area`.
 - Kolom `price`, `installment`, `land_area`, dan `building_area` bertipe objek, padahal kita akan memprediksi harga yang merupakan kategori numerik. Hal ini harus diubah menjadi numerik dengan tipe data int64.
 
-<div><img src="https://github.com/rizkidwi07/Source/blob/main/Screenshot%202024-12-06%20004053.png") width="450"/></div><br />
+<div><img src="https://github.com/rizkidwi07/Source/raw/main/Screenshot%202024-12-08%20000546.png") width="225"/></div><br />
+
+- Terdapat 7466 missing value pada kolom `status`
+- Terdapat 2 missing value pada kolom `land_area`
+- Terdapat 1 missing value pada kolom `building_area`
+
+<div><img src="https://github.com/rizkidwi07/Source/raw/main/Screenshot%202024-12-06%20004053.png") width="450"/></div><br />
 
 Terdapat 616 sampel data yang duplikasi.
 
-<div><img src="https://github.com/rizkidwi07/Source/blob/main/Screenshot%202024-12-06%20004100.png") width="450"/></div><br />
+<div><img src="https://github.com/rizkidwi07/Source/raw/main/Screenshot%202024-12-06%20004100.png") width="450"/></div><br />
 
-Dari hasil fungsi describe(), nilai minimum untuk kolom `bedroom_count`, `bathroom_count`, dan `carport_count` adalah 0. `bedroom_count`, `bathroom_count`, dan `carport_count` adalah jumlah dari kamar tidur, kamar mandi, dan tempat parkir di suatu properti, sehingga tidak mungkin ada properti dengan jumlah kamar tidur, kamar mandi, dan tempat parkir bernilai 0.
+Dari hasil fungsi describe(), nilai minimum untuk kolom `bedroom_count`, `bathroom_count`, dan `carport_count` adalah 0. `bedroom_count`, `bathroom_count`, dan `carport_count` adalah jumlah dari kamar tidur, kamar mandi, dan tempat parkir di suatu properti, sehingga tidak mungkin ada properti dengan jumlah kamar tidur, kamar mandi, dan tempat parkir bernilai 0. Cek ada berapa missing value pada ketiga kolom tersebut.
 
-<div><img src="https://github.com/rizkidwi07/Source/blob/main/Screenshot%202024-12-06%20011243.png") width="450"/></div><br />
-<div><img src="https://github.com/rizkidwi07/Source/blob/main/Screenshot%202024-12-06%20011255.png") width="450"/></div><br />
-<div><img src="https://github.com/rizkidwi07/Source/blob/main/Screenshot%202024-12-06%20011303.png") width="450"/></div><br />
-<div><img src="https://github.com/rizkidwi07/Source/blob/main/Screenshot%202024-12-06%20011309.png") width="450"/></div><br />
-<div><img src="https://github.com/rizkidwi07/Source/blob/main/Screenshot%202024-12-06%20011315.png") width="450"/></div><br />
-<div><img src="https://github.com/rizkidwi07/Source/blob/main/Screenshot%202024-12-06%20011320.png") width="450"/></div><br />
-<div><img src="https://github.com/rizkidwi07/Source/blob/main/Screenshot%202024-12-06%20011325.png") width="450"/></div><br />
+<div><img src="https://github.com/rizkidwi07/Source/raw/main/Screenshot%202024-12-08%20000559.png") width="450"/></div><br />
 
-Hasil bloxpot dari kolom numerik `price`, `installment`, `bedroom_count`, `bathroom_count`, `carport_count`, `land_area`, `building_area` terdapat beberapa outliers.
-
-**Menangani Missing Value**
-<div><img src="https://github.com/rizkidwi07/Source/blob/main/Screenshot%202024-12-06%20004131.png") width="225"/></div><br />
-
-Berdasarkan hasil di atas, dapat diketahui bahwa nilai yang paling dominan dalam kolom `status` ialah "Featured". Nilai inilah yang selanjutnya akan digunakan sebagai pengganti missing value.
-
-<div><img src="https://github.com/rizkidwi07/Source/blob/main/Screenshot%202024-12-06%20004145.png") width="1000"/></div><br />
-
-2 sampel missing value pada kolom `land_area` merupakan jumlah yang kecil jika dibandingkan dengan jumlah total sampel yaitu 7.611. Jika 2 sampel ini dihapus, tidak jadi masalah sebab kita masih memiliki 7.611 sampel lainnya. Oleh karena itu, bisa dihapus saja missing value ini.
-
-<div><img src="https://github.com/rizkidwi07/Source/blob/main/Screenshot%202024-12-06%20004151.png") width="1000"/></div><br />
-
-1 sampel missing value merupakan jumlah yang kecil jika dibandingkan dengan jumlah total sampel yaitu 7.611. Jika 1 sampel ini dihapus, tidak jadi masalah sebab kita masih memiliki 7.611 sampel lainnya. Oleh karena itu, bisa dihapus saja missing value ini.
-
-<div><img src="https://github.com/rizkidwi07/Source/blob/main/Screenshot%202024-12-06%20004109.png") width="225"/></div><br />
-
-Hasil di atas adalah jumlah dari kolom `bedroom_count`, `bathroom_count`, dan `carport_count` yang bernilai 0. Drop baris yang terdapat nilai 0.
-
-<div><img src="https://github.com/rizkidwi07/Source/blob/main/Screenshot%202024-12-06%20004214.png") width="225"/></div><br />
-
-Missing value sudah diatasi. Jumlah sampel sekarang ada sebanyak 5.233
-
-**Menangani Duplikasi Data**
-
-Hapus data pada baris yang memiliki duplikasi data dengan fungsi drop.
-
-<div><img src="https://github.com/rizkidwi07/Source/blob/main/Screenshot%202024-12-06%20004225.png") width="225"/></div><br />
-
-Duplikasi data sudah teratasi. Jumlah sampel sekarang ada sebanyak 4.867
-
-**Menangani Masalah Tipe Data**
-
-Konversi kolom `price`, `installment`, `land_area`, dan `building_area` ke dalam tipe data int64
-
-<div><img src="https://github.com/rizkidwi07/Source/blob/main/Screenshot%202024-12-06%20004236.png") width="225"/></div><br />
-
-Masalah tipe data sudah teratasi. Kolom `price`, `installment`, `land_area`, dan `building_area` sudah dalam tipe data int64
-
-**Menangani Outliers**
-
-Hapus data pada baris yang memiliki outliers dengan fungsi drop.
-
-<div><img src="https://github.com/rizkidwi07/Source/blob/main/Screenshot%202024-12-06%20004259.png") width="225"/></div><br />
-
-Dataset sekarang telah bersih dan memiliki 3.751 sampel.
-
-**Univariate Analysis**
-
-Univariate Analysis adalah menganalisis setiap fitur secara terpisah.
-
-**Analisis jumlah nilai unique pada setiap fitur kategorik**
-
-<div><img src="https://github.com/rizkidwi07/Source/blob/main/Screenshot%202024-12-06%20012217.png") width="450"/></div><br />
-
-Terdapat 1 kategori pada fitur `type`, yaitu Rumah. Dari data persentase dapat disimpulkan bahwa 100% merupakan tipe Rumah.
-
-<div><img src="https://github.com/rizkidwi07/Source/blob/main/Screenshot%202024-12-06%20012223.png") width="450"/></div><br />
-
-Terdapat 2 kategori pada fitur `status`, yaitu Featured dan Premiere. Dari data persentase dapat disimpulkan bahwa 98.9% merupakan tipe Featured dan 1.1% merupakan tipe Premiere.
-
-<div><img src="https://github.com/rizkidwi07/Source/blob/main/Screenshot%202024-12-06%20012232.png") width="450"/></div><br />
-
-Terdapat 3.701 kategori pada fitur `house_name`. Ini berarti terdapat 3.701 macam nama rumah yang ada.
-
-<div><img src="https://github.com/rizkidwi07/Source/blob/main/Screenshot%202024-12-06%20012240.png") width="450"/></div><br />
-
-Terdapat 27 kategori pada fitur `location`. Ini berarti terdapat rumah di 27 lokasi berbeda.
-
-**Analisis jumlah nilai unique pada setiap fitur numerik**
-
-<div><img src="https://github.com/rizkidwi07/Source/blob/main/Screenshot%202024-12-06%20012320.png") width="450"/></div><br />
-<div><img src="https://github.com/rizkidwi07/Source/blob/main/Screenshot%202024-12-06%20012334.png") width="450"/></div><br />
-
-Dari histogram `price`, kita bisa memperoleh beberapa informasi, antara lain:
-
-- Distribusi harga miring ke kanan (right-skewed). Hal ini akan berimplikasi pada model.
-- Semakin tinggi harga rumah, semakin sedikit jumlah sampel yang tersedia. Tren ini menunjukkan bahwa rumah dengan harga terjangkau lebih umum dibandingkan rumah mewah.
-- Rentang harga rumah cukup lebar, mencakup properti dari beberapa ratus juta hingga sekitar Rp 10 miliar.
-- Berdasarkan konsentrasi sampel, dapat disimpulkan bahwa rumah dengan harga di bawah Rp 2 miliar mendominasi pasar.
-
-**Multivariate Analysis**
-
-Multivariate Analysis adalah menganalisis hubungan antara dua atau lebih variabel pada data.
-
-**Analisis rata-rata harga terhadap masing-masing fitur untuk mengetahui pengaruh fitur kategori terhadap harga** 
-
-<div><img src="https://github.com/rizkidwi07/Source/blob/main/Screenshot%202024-12-06%20012413.png") width="450"/></div><br />
-<div><img src="https://github.com/rizkidwi07/Source/blob/main/Screenshot%202024-12-06%20012419.png") width="450"/></div><br />
-
-Dengan mengamati rata-rata harga relatif terhadap fitur kategori di atas, dapat diperoleh insight sebagai berikut:
-
--  Karena fitur `type` hanya berisi satu nilai (Rumah), fitur ini tidak memiliki pengaruh signifikan terhadap variasi `price`. Dengan kata lain, tidak ada perbedaan rata-rata harga yang bisa dianalisis berdasarkan tipe properti. Sehingga, fitur tersebut dapat di-drop.
-- Properti dengan `status` Premier memiliki rata-rata harga lebih tinggi dibandingkan dengan properti ber`status` Featured. `status` properti tampaknya memiliki dampak signifikan pada rata-rata `price`.
-- Terdapat lebih dari 3.000 nama rumah yang unik. `house_name` tidak terlalu membantu untuk analisis agregat karena distribusinya sangat tersebar. Sehingga, fitur tersebut dapat di-drop.
-- Distribusi antara kecamatan cukup merata. `location` merupakan fitur penting yang dapat mempengaruhi harga rumah. Properti di lokasi populer seperti kemungkinan memiliki harga lebih tinggi dibandingkan dengan lokasi yang kurang terwakili.
-
-- **Analisis hubungan antar fitur numerik**
-
-<div><img src="https://github.com/rizkidwi07/Source/blob/main/Screenshot%202024-12-06%20012503.png") width="450"/></div><br />
-
-Pada pola sebaran data grafik pairplot, terlihat `installment`, `land_area`, dan `building_area` memiliki korelasi yang tinggi dengan fitur `price`. Sedangkan ketiga fitur lainnya yaitu `bedroom_count`, `bathroom_count`, dan `carport_count` terlihat memiliki korelasi yang lemah karena sebarannya tidak membentuk pola. Untuk mengevaluasi skor korelasinya, gunakan correlation matrix.
-
-<div><img src="https://github.com/rizkidwi07/Source/blob/main/Screenshot%202024-12-06%20012531.png") width="450"/></div><br />
-
-Fitur `installment` memiliki skor korelasi yang sangat tinggi (1), `land_area`, dan `building_area` memiliki skor korelasi yang besar (di atas 0.75) dengan fitur target `price`. Artinya, fitur `price` berkorelasi tinggi dengan ketiga fitur tersebut. Sementara itu, fitur `bedroom_count`, `bathroom_count` memiliki korelasi normal (0.5). Fitur `carport_count` (0.42) bisa didrop karena kurang berkolerasi.
-
-<div><img src="https://github.com/rizkidwi07/Source/blob/main/Screenshot%202024-12-06%20014153.png") width="450"/></div><br />
-
-Inilah data yang akan digunakan. Terdapat 3.751 sampel dari 8 kategori (fitur).
 
 ## Data Preparation
 
 Teknik yang digunakan dalam penyiapan data (Data Preparation) yaitu:
+
+- Menangani Missing Values
+
+  Pada kasus dataset ini ada beberapa kolom dengan missing values yang tidak sedikit dan akan berisiko besar jika sampelnya dihapus. Salah satu teknik yang dapat diterapkan yaitu dengan melakukan imputasi atau nilai pengganti. Pada proyek ini nilai pengganti yang digunakan adalah nilai terbanyak. Ada pula missing values yang sedikit dan missing values tersebut bisa dihapus karena tidak terlalu berpengaruh. Kemudian, dari hasil fungsi describe(), nilai minimum untuk kolom `bedroom_count`, `bathroom_count`, dan `carport_count` adalah 0. Seperti kita tahu, `bedroom_count`, `bathroom_count`, dan `carport_count` adalah jumlah dari kamar tidur, kamar mandi, dan tempat parkir di suatu properti, sehingga tidak mungkin ada properti dengan jumlah kamar tidur, kamar mandi, dan tempat parkir bernilai 0. Ini merupakan data yang tidak valid atau sering disebut missing value dan bisa dihapus saja.
+
+- Menangani Duplikasi
+
+  Pada kasus dataset ini ada beberapa baris dengan data duplikasi yang jumlahnya sedikit. Ketika menemukan duplikasi pada data, tentunya data tersebut harus dihilangkan atau dihapus duplikasinya. Karena jumlah duplikasi dan ukuran data masih sedikit, maka bisa dihapus secara manual.
+
+- Menangani Masalah Tipe Data
+
+  Pada kasus dataset ini, kolom `price`, `installment`, `land_area`, dan `building_area` bertipe objek, padahal kita akan memprediksi harga yang merupakan kategori numerik. Hal ini harus diubah menjadi numerik dengan tipe data int64. Untuk mengatasi masalah ini, akan diganti tipe data pada kolom`price`, `installment`, `land_area`, dan `building_area` menjadi int64. Proses ini dapat dilakukan menggunakan function astype(int64).
+
+- Menangani Outliers
+
+  Outliers adalah titik data yang berbeda secara signifikan dari pengamatan lainnya sehingga dapat berakibat buruk pada model prediksi. Pada proyek ini menggunakan IQR (InterQuartile Range) untuk mendeteksi outliers. IQR dapat menentukan data outliers yang kondisinya di luar batas bawah atau batas atas dari dataset. IQR dapat divisualkan menggunakan boxplot.
+
+- Univariate Analysis
+
+  Univariate Analysis adalah menganalisis setiap fitur secara terpisah.
+
+  **Analisis jumlah nilai unique pada setiap fitur kategorik**
+  
+  <div><img src="https://github.com/rizkidwi07/Source/raw/main/Screenshot%202024-12-06%20012217.png") width="450"/></div><br />
+  
+  Terdapat 1 kategori pada fitur `type`, yaitu Rumah. Dari data persentase dapat disimpulkan bahwa 100% merupakan tipe Rumah.
+  
+  <div><img src="https://github.com/rizkidwi07/Source/raw/main/Screenshot%202024-12-06%20012223.png") width="450"/></div><br />
+  
+  Terdapat 2 kategori pada fitur `status`, yaitu Featured dan Premiere. Dari data persentase dapat disimpulkan bahwa 98.9% merupakan tipe Featured dan 1.1% merupakan tipe Premiere.
+  
+  <div><img src="https://github.com/rizkidwi07/Source/raw/main/Screenshot%202024-12-06%20012232.png") width="450"/></div><br />
+  
+  Terdapat 3.701 kategori pada fitur `house_name`. Ini berarti terdapat 3.701 macam nama rumah yang ada.
+  
+  <div><img src="https://github.com/rizkidwi07/Source/raw/main/Screenshot%202024-12-06%20012240.png") width="450"/></div><br />
+  
+  Terdapat 27 kategori pada fitur `location`. Ini berarti terdapat rumah di 27 lokasi berbeda.
+  
+  **Analisis jumlah nilai unique pada setiap fitur numerik**
+  
+  <div><img src="https://github.com/rizkidwi07/Source/raw/main/Screenshot%202024-12-06%20012320.png") width="450"/></div><br />
+  <div><img src="https://github.com/rizkidwi07/Source/raw/main/Screenshot%202024-12-06%20012334.png") width="450"/></div><br />
+  
+  Dari histogram `price`, kita bisa memperoleh beberapa informasi, antara lain:
+  
+  - Distribusi harga miring ke kanan (right-skewed). Hal ini akan berimplikasi pada model.
+  - Semakin tinggi harga rumah, semakin sedikit jumlah sampel yang tersedia. Tren ini menunjukkan bahwa rumah dengan harga terjangkau lebih umum dibandingkan rumah mewah.
+  - Rentang harga rumah cukup lebar, mencakup properti dari beberapa ratus juta hingga sekitar Rp 10 miliar.
+  - Berdasarkan konsentrasi sampel, dapat disimpulkan bahwa rumah dengan harga di bawah Rp 2 miliar mendominasi pasar.
+  
+  
+- Multivariate Analysis
+  
+  Multivariate Analysis adalah menganalisis hubungan antara dua atau lebih variabel pada data.
+  
+  **Analisis rata-rata harga terhadap masing-masing fitur untuk mengetahui pengaruh fitur kategori terhadap harga** 
+  
+  <div><img src="https://github.com/rizkidwi07/Source/raw/main/Screenshot%202024-12-06%20012413.png") width="450"/></div><br />
+  <div><img src="https://github.com/rizkidwi07/Source/raw/main/Screenshot%202024-12-06%20012419.png") width="450"/></div><br />
+  
+  Dengan mengamati rata-rata harga relatif terhadap fitur kategori di atas, dapat diperoleh insight sebagai berikut:
+  
+  -  Karena fitur `type` hanya berisi satu nilai (Rumah), fitur ini tidak memiliki pengaruh signifikan terhadap variasi `price`. Dengan kata lain, tidak ada perbedaan rata-rata harga yang bisa dianalisis berdasarkan tipe properti. Sehingga, fitur tersebut dapat di-drop.
+  - Properti dengan `status` Premier memiliki rata-rata harga lebih tinggi dibandingkan dengan properti ber`status` Featured. `status` properti tampaknya memiliki dampak signifikan pada rata-rata `price`.
+  - Terdapat lebih dari 3.000 nama rumah yang unik. `house_name` tidak terlalu membantu untuk analisis agregat karena distribusinya sangat tersebar. Sehingga, fitur tersebut dapat di-drop.
+  - Distribusi antara kecamatan cukup merata. `location` merupakan fitur penting yang dapat mempengaruhi harga rumah. Properti di lokasi populer seperti kemungkinan memiliki harga lebih tinggi dibandingkan dengan lokasi yang kurang terwakili.
+  
+  - **Analisis hubungan antar fitur numerik**
+  
+  <div><img src="https://github.com/rizkidwi07/Source/raw/main/Screenshot%202024-12-06%20012503.png") width="450"/></div><br />
+  
+  Pada pola sebaran data grafik pairplot, terlihat `installment`, `land_area`, dan `building_area` memiliki korelasi yang tinggi dengan fitur `price`. Sedangkan ketiga fitur lainnya yaitu `bedroom_count`, `bathroom_count`, dan `carport_count` terlihat memiliki korelasi yang lemah karena sebarannya tidak membentuk pola. Untuk mengevaluasi skor korelasinya, gunakan correlation matrix.
+  
+  <div><img src="https://github.com/rizkidwi07/Source/raw/main/Screenshot%202024-12-06%20012531.png") width="450"/></div><br />
+  
+  Fitur `installment` memiliki skor korelasi yang sangat tinggi (1), `land_area`, dan `building_area` memiliki skor korelasi yang besar (di atas 0.75) dengan fitur target `price`. Artinya, fitur `price`       berkorelasi tinggi dengan ketiga fitur tersebut. Sementara itu, fitur `bedroom_count`, `bathroom_count` memiliki korelasi normal (0.5). Fitur `carport_count` (0.42) bisa didrop karena kurang berkolerasi.
+  
+  <div><img src="https://github.com/rizkidwi07/Source/raw/main/Screenshot%202024-12-06%20014153.png") width="450"/></div><br />
+  
+  Inilah data yang akan digunakan. Terdapat 3.751 sampel dari 8 kategori (fitur).
 
 - One-Hot Encoding
   
@@ -244,9 +216,25 @@ Teknik yang digunakan dalam penyiapan data (Data Preparation) yaitu:
 ## Evaluation
 Pada proyek ini, model yang dibuat merupakan kasus prediksi harga dan menggunakan metriks akurasi. Metrik evaluasi yang digunakan pada proyek ini adalah akurasi dan mean squared error (MSE). Akurasi menentukan tingkat kemiripan antara hasil prediksi dengan nilai yang sebenarnya (y_test). Mean squared error (MSE) mengukur error dalam model statistik dengan cara menghitung rata-rata error dari kuadrat hasil aktual dikurang hasil prediksi. Berikut rumus dari MSE:
 
-<div><img src="https://github.com/rizkidwi07/Source/blob/main/Screenshot%202024-12-06%20020439.png") width="450"/></div><br />
+<div><img src="https://github.com/rizkidwi07/Source/raw/main/Screenshot%202024-12-06%20020439.png") width="450"/></div><br />
 
 Berikut hasil evaluasi pada proyek ini:
 <div><img src="https://github.com/rizkidwi07/Source/blob/main/Screenshot%202024-12-07%20000115.png") width="450"/></div><br />
 
 Model Random Forest (RF) memberikan nilai eror yang paling kecil. Sedangkan model dengan algoritma KNN memiliki eror yang paling besar. Sehingga model Random Forest (RF) yang akan kita pilih sebagai model terbaik untuk melakukan prediksi harga rumah di Bandung.
+
+1. Apakah model menjawab problem statement?
+
+- Problem Statement 1: "Dari serangkaian fitur yang ada, fitur apa yang paling berpengaruh terhadap harga prediksi properti rumah di Bandung?"
+Dampak: Model Random Forest (RF), yang memiliki performa terbaik berdasarkan MSE, secara inheren menyediakan informasi mengenai pentingnya fitur melalui atribut feature importance. Hasil ini membantu menjawab fitur mana yang paling berpengaruh terhadap harga properti. Misalnya, fitur seperti lokasi, luas tanah, dan kondisi properti dapat diidentifikasi sebagai faktor dominan. Dengan ini, analisis dapat digunakan untuk pengambilan keputusan bisnis, seperti penentuan harga atau prioritas pemasaran.
+- Problem Statement 2: "Bagaimana memprediksi harga rumah dengan fitur tertentu?"
+Dampak: Model RF menghasilkan prediksi yang cukup akurat berdasarkan dataset dan fitur yang disediakan. Dengan menggunakan model ini, pelaku bisnis atau pengguna dapat memperkirakan harga rumah di Bandung berdasarkan parameter seperti status, cicilan, lokasi, jumlah kamar tidur, jumlah kamar mandi, luas tanah, dan luas bangunan.
+
+2. Apakah model berhasil mencapai goals yang diharapkan?
+
+- Goal 1: "Mengetahui fitur yang paling berkorelasi dengan harga properti rumah di Bandung."
+Capaian: Random Forest tidak hanya memberikan akurasi tinggi dalam prediksi, tetapi juga menyediakan analisis fitur yang menunjukkan keterkaitan antara atribut (misalnya, lokasi, luas tanah) dan harga properti. Hal ini menjawab tujuan pertama dengan memberikan wawasan yang dapat ditindaklanjuti.
+- Goal 2: "Membuat model machine learning yang dapat memprediksi harga properti rumah di Bandung seakurat mungkin berdasarkan fitur-fitur yang ada."
+Capaian: Dengan menggunakan evaluasi berbasis MSE, model Random Forest memberikan error terendah dibandingkan algoritma lain (KNN dan Boosting). Hal ini menunjukkan bahwa tujuan kedua telah tercapai karena model mampu memprediksi harga rumah dengan akurasi tinggi.
+
+3. Apakah solusi statement yang direncanakan berdampak? Dampak: Metodologi yang direncanakan—menggunakan algoritma seperti KNN, Random Forest, dan Boosting Algorithm dengan MSE sebagai metrik utama—terbukti efektif. Pilihan Random Forest sebagai model akhir memberikan keseimbangan antara interpretabilitas dan akurasi. Dalam konteks bisnis, ini berarti solusi tidak hanya menjawab pertanyaan analitis tetapi juga mendukung keputusan operasional, seperti penentuan harga pasar atau strategi penjualan.
