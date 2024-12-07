@@ -102,7 +102,7 @@ Teknik yang digunakan dalam penyiapan data (Data Preparation) yaitu:
 
 - Menangani Missing Values
 
-  Pada kasus dataset ini ada beberapa kolom dengan missing values yang tidak sedikit dan akan berisiko besar jika sampelnya dihapus. Salah satu teknik yang dapat diterapkan yaitu dengan melakukan imputasi atau nilai pengganti. Pada proyek ini nilai pengganti yang digunakan adalah nilai terbanyak. Ada pula missing values yang sedikit dan missing values tersebut bisa dihapus karena tidak terlalu berpengaruh. Kemudian, dari hasil fungsi describe(), nilai minimum untuk kolom `bedroom_count`, `bathroom_count`, dan `carport_count` adalah 0. Seperti kita tahu, `bedroom_count`, `bathroom_count`, dan `carport_count` adalah jumlah dari kamar tidur, kamar mandi, dan tempat parkir di suatu properti, sehingga tidak mungkin ada properti dengan jumlah kamar tidur, kamar mandi, dan tempat parkir bernilai 0. Ini merupakan data yang tidak valid atau sering disebut missing value dan bisa dihapus saja.
+  Pada kasus dataset ini ada beberapa kolom dengan missing values yang tidak sedikit dan akan berisiko besar jika sampelnya dihapus. Salah satu teknik yang dapat diterapkan yaitu dengan melakukan imputasi atau nilai pengganti. Pada proyek ini nilai pengganti yang digunakan adalah nilai terbanyak. Ada pula missing values yang sedikit dan missing values tersebut bisa dihapus karena tidak terlalu berpengaruh. Kemudian, dari hasil fungsi describe(), nilai minimum untuk kolom `bedroom_count`, `bathroom_count`, dan `carport_count` adalah 0. Seperti yang diketahui, `bedroom_count`, `bathroom_count`, dan `carport_count` adalah jumlah dari kamar tidur, kamar mandi, dan tempat parkir di suatu properti, sehingga tidak mungkin ada properti dengan jumlah kamar tidur, kamar mandi, dan tempat parkir bernilai 0. Ini merupakan data yang tidak valid atau sering disebut missing value dan bisa dihapus saja.
 
 - Menangani Duplikasi
 
@@ -223,18 +223,28 @@ Berikut hasil evaluasi pada proyek ini:
 
 Model Random Forest (RF) memberikan nilai eror yang paling kecil. Sedangkan model dengan algoritma KNN memiliki eror yang paling besar. Sehingga model Random Forest (RF) yang akan kita pilih sebagai model terbaik untuk melakukan prediksi harga rumah di Bandung.
 
-1. Apakah model menjawab problem statement?
+**Evaluasi Dampak Model Terhadap Business Understanding**
 
-- Problem Statement 1: "Dari serangkaian fitur yang ada, fitur apa yang paling berpengaruh terhadap harga prediksi properti rumah di Bandung?"
-Dampak: Model Random Forest (RF), yang memiliki performa terbaik berdasarkan MSE, secara inheren menyediakan informasi mengenai pentingnya fitur melalui atribut feature importance. Hasil ini membantu menjawab fitur mana yang paling berpengaruh terhadap harga properti. Misalnya, fitur seperti lokasi, luas tanah, dan kondisi properti dapat diidentifikasi sebagai faktor dominan. Dengan ini, analisis dapat digunakan untuk pengambilan keputusan bisnis, seperti penentuan harga atau prioritas pemasaran.
-- Problem Statement 2: "Bagaimana memprediksi harga rumah dengan fitur tertentu?"
-Dampak: Model RF menghasilkan prediksi yang cukup akurat berdasarkan dataset dan fitur yang disediakan. Dengan menggunakan model ini, pelaku bisnis atau pengguna dapat memperkirakan harga rumah di Bandung berdasarkan parameter seperti status, cicilan, lokasi, jumlah kamar tidur, jumlah kamar mandi, luas tanah, dan luas bangunan.
+1. Apakah model menjawab problem statement?
+   
+  - Problem Statement 1: "Dari serangkaian fitur yang ada, fitur apa yang paling berpengaruh terhadap harga prediksi properti rumah di Bandung?"
+  
+    Dampak: Model Random Forest (RF), yang memiliki performa terbaik berdasarkan MSE, secara inheren menyediakan informasi mengenai pentingnya fitur melalui atribut feature importance. Hasil ini membantu menjawab fitur mana yang paling berpengaruh terhadap harga properti. Misalnya, fitur seperti lokasi, luas tanah, dan kondisi properti dapat diidentifikasi sebagai faktor dominan. Dengan ini, analisis dapat digunakan untuk pengambilan keputusan bisnis, seperti penentuan harga atau prioritas pemasaran.
+
+  - Problem Statement 2: "Bagaimana memprediksi harga rumah dengan fitur tertentu?"
+  
+    Dampak: Model RF menghasilkan prediksi yang cukup akurat berdasarkan dataset dan fitur yang disediakan. Dengan menggunakan model ini, pelaku bisnis atau pengguna dapat memperkirakan harga rumah di Bandung berdasarkan parameter seperti status, cicilan, lokasi, jumlah kamar tidur, jumlah kamar mandi, luas tanah, dan luas bangunan.
 
 2. Apakah model berhasil mencapai goals yang diharapkan?
 
-- Goal 1: "Mengetahui fitur yang paling berkorelasi dengan harga properti rumah di Bandung."
-Capaian: Random Forest tidak hanya memberikan akurasi tinggi dalam prediksi, tetapi juga menyediakan analisis fitur yang menunjukkan keterkaitan antara atribut (misalnya, lokasi, luas tanah) dan harga properti. Hal ini menjawab tujuan pertama dengan memberikan wawasan yang dapat ditindaklanjuti.
-- Goal 2: "Membuat model machine learning yang dapat memprediksi harga properti rumah di Bandung seakurat mungkin berdasarkan fitur-fitur yang ada."
-Capaian: Dengan menggunakan evaluasi berbasis MSE, model Random Forest memberikan error terendah dibandingkan algoritma lain (KNN dan Boosting). Hal ini menunjukkan bahwa tujuan kedua telah tercapai karena model mampu memprediksi harga rumah dengan akurasi tinggi.
+  - Goal 1: "Mengetahui fitur yang paling berkorelasi dengan harga properti rumah di Bandung."
+  
+    Capaian: Random Forest tidak hanya memberikan akurasi tinggi dalam prediksi, tetapi juga menyediakan analisis fitur yang menunjukkan keterkaitan antara atribut (misalnya, lokasi, luas tanah) dan harga properti. Hal ini menjawab tujuan pertama dengan memberikan wawasan yang dapat ditindaklanjuti.
 
-3. Apakah solusi statement yang direncanakan berdampak? Dampak: Metodologi yang direncanakan—menggunakan algoritma seperti KNN, Random Forest, dan Boosting Algorithm dengan MSE sebagai metrik utama—terbukti efektif. Pilihan Random Forest sebagai model akhir memberikan keseimbangan antara interpretabilitas dan akurasi. Dalam konteks bisnis, ini berarti solusi tidak hanya menjawab pertanyaan analitis tetapi juga mendukung keputusan operasional, seperti penentuan harga pasar atau strategi penjualan.
+  - Goal 2: "Membuat model machine learning yang dapat memprediksi harga properti rumah di Bandung seakurat mungkin berdasarkan fitur-fitur yang ada."
+  
+    Capaian: Dengan menggunakan evaluasi berbasis MSE, model Random Forest memberikan error terendah dibandingkan algoritma lain (KNN dan Boosting). Hal ini menunjukkan bahwa tujuan kedua telah tercapai karena model mampu memprediksi harga rumah dengan akurasi tinggi.
+
+3. Apakah solusi statement yang direncanakan berdampak?
+
+    Iya berdampak. Metodologi yang direncanakan—menggunakan algoritma seperti KNN, Random Forest, dan Boosting Algorithm dengan MSE sebagai metrik utama—terbukti efektif. Pilihan Random Forest sebagai model akhir memberikan keseimbangan antara interpretabilitas dan akurasi. Dalam konteks bisnis, ini berarti solusi tidak hanya menjawab pertanyaan analitis tetapi juga mendukung keputusan operasional, seperti penentuan harga pasar atau strategi penjualan.
