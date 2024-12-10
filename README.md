@@ -95,27 +95,6 @@ Dari hasil fungsi describe(), nilai minimum untuk kolom `bedroom_count`, `bathro
 
 <div><img src="https://github.com/rizkidwi07/Source/raw/main/Screenshot%202024-12-08%20000559.png") width="450"/></div><br />
 
-
-## Data Preparation
-
-Teknik yang digunakan dalam penyiapan data (Data Preparation) yaitu:
-
-- Menangani Missing Values
-
-  Pada kasus dataset ini ada beberapa kolom dengan missing values yang tidak sedikit dan akan berisiko besar jika sampelnya dihapus. Salah satu teknik yang dapat diterapkan yaitu dengan melakukan imputasi atau nilai pengganti. Pada proyek ini nilai pengganti yang digunakan adalah nilai terbanyak. Ada pula missing values yang sedikit dan missing values tersebut bisa dihapus karena tidak terlalu berpengaruh. Kemudian, dari hasil fungsi describe(), nilai minimum untuk kolom `bedroom_count`, `bathroom_count`, dan `carport_count` adalah 0. Seperti yang diketahui, `bedroom_count`, `bathroom_count`, dan `carport_count` adalah jumlah dari kamar tidur, kamar mandi, dan tempat parkir di suatu properti, sehingga tidak mungkin ada properti dengan jumlah kamar tidur, kamar mandi, dan tempat parkir bernilai 0. Ini merupakan data yang tidak valid atau sering disebut missing value dan bisa dihapus saja.
-
-- Menangani Duplikasi
-
-  Pada kasus dataset ini ada beberapa baris dengan data duplikasi yang jumlahnya sedikit. Ketika menemukan duplikasi pada data, tentunya data tersebut harus dihilangkan atau dihapus duplikasinya. Karena jumlah duplikasi dan ukuran data masih sedikit, maka bisa dihapus secara manual.
-
-- Menangani Masalah Tipe Data
-
-  Pada kasus dataset ini, kolom `price`, `installment`, `land_area`, dan `building_area` bertipe objek, padahal kita akan memprediksi harga yang merupakan kategori numerik. Hal ini harus diubah menjadi numerik dengan tipe data int64. Untuk mengatasi masalah ini, akan diganti tipe data pada kolom`price`, `installment`, `land_area`, dan `building_area` menjadi int64. Proses ini dapat dilakukan menggunakan function astype(int64).
-
-- Menangani Outliers
-
-  Outliers adalah titik data yang berbeda secara signifikan dari pengamatan lainnya sehingga dapat berakibat buruk pada model prediksi. Pada proyek ini menggunakan IQR (InterQuartile Range) untuk mendeteksi outliers. IQR dapat menentukan data outliers yang kondisinya di luar batas bawah atau batas atas dari dataset. IQR dapat divisualkan menggunakan boxplot.
-
 - Univariate Analysis
 
   Univariate Analysis adalah menganalisis setiap fitur secara terpisah.
@@ -181,6 +160,10 @@ Teknik yang digunakan dalam penyiapan data (Data Preparation) yaitu:
   
   Inilah data yang akan digunakan. Terdapat 3.751 sampel dari 8 kategori (fitur).
 
+## Data Preparation
+
+Teknik yang digunakan dalam penyiapan data (Data Preparation) yaitu:
+
 - One-Hot Encoding
   
   One hot encoding adalah teknik mengubah data kategorik menjadi data numerik dimana setiap kategori menjadi kolom baru ke dalam vektor biner (nilai 0 atau 1). Fitur yang akan diubah menjadi numerik pada proyek ini adalah kolom `status` dan `location`.
@@ -196,32 +179,36 @@ Teknik yang digunakan dalam penyiapan data (Data Preparation) yaitu:
   - K-Nearest Neighbour
 
     K-Nearest Neighbour bekerja dengan membandingkan jarak satu sampel ke sampel pelatihan lain dengan memilih sejumlah k tetangga terdekat. Proyek ini menggunakan [sklearn.neighbors.KNeighborsRegressor](https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsRegressor.html) dengan memasukkan X_train dan y_train dalam membangun model. Parameter yang digunakan pada proyek ini adalah :
-    + `n_neighbors` = Jumlah k tetangga tedekat.
+    + `n_neighbors` = 10 (Jumlah tetangga terdekat yang digunakan dalam prediksi).
 
   - Random Forest
 
     Algoritma random forest adalah teknik dalam machine learning dengan metode ensemble. Teknik ini beroperasi dengan membangun banyak decision tree pada waktu pelatihan. Proyek ini menggunakan [sklearn.ensemble.RandomForestRegressor](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestRegressor.html) dengan memasukkan X_train dan y_train dalam membangun model. Parameter yang digunakan pada proyek ini adalah :
-    + `n_estimators` = Jumlah maksimum estimator di mana boosting dihentikan.
-    + `max_depth` = Kedalaman maksimum setiap tree.
-    + `random_state` = Mengontrol seed acak yang diberikan pada setiap base_estimator pada setiap iterasi boosting.
-    + `n_jobs` = Jumlah job (pekerjaan) yang digunakan secara paralel untuk mengontrol thread atau proses yang berjalan.
+    + `n_estimators` = 50 (Jumlah maksimum estimator di mana boosting dihentikan).
+    + `max_depth` = 16 (Kedalaman maksimum setiap tree).
+    + `random_state` = 55 (Mengontrol seed acak yang diberikan pada setiap base_estimator pada setiap iterasi boosting).
+    + `n_jobs` = -1 (Jumlah job (pekerjaan) yang digunakan secara paralel untuk mengontrol thread atau proses yang berjalan).
 
   - Adaboost
 
     AdaBoost juga disebut Adaptive Boosting adalah teknik dalam machine learning dengan metode ensemble.  Algoritma yang paling umum digunakan dengan AdaBoost adalah pohon keputusan (decision trees) satu tingkat yang berarti memiliki pohon Keputusan dengan hanya 1 split. Pohon-pohon ini juga disebut Decision Stumps. Algoritma ini bertujuan untuk meningkatkan performa atau akurasi prediksi dengan cara menggabungkan beberapa model sederhana dan dianggap lemah (weak learners) secara berurutan sehingga membentuk suatu model yang kuat (strong ensemble learner). Proyek ini menggunakan [sklearn.ensemble.AdaBoostRegressor](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.AdaBoostRegressor.html) dengan memasukkan X_train dan y_train dalam membangun model. Parameter yang digunakan pada proyek ini adalah :
-    + `n_estimators` = Jumlah maksimum estimator di mana boosting dihentikan.
-    + `learning_rate` = Learning rate memperkuat kontribusi setiap regressor.
-    + `random_state` = Mengontrol seed acak yang diberikan pada setiap base_estimator pada setiap iterasi boosting.
+    + `n_estimators` = default (Jumlah maksimum estimator di mana boosting dihentikan).
+    + `learning_rate` = 0.05 (Learning rate memperkuat kontribusi setiap regressor).
+    + `random_state` = 55 (Mengontrol seed acak yang diberikan pada setiap base_estimator pada setiap iterasi boosting).
 
 ## Evaluation
 Pada proyek ini, model yang dibuat merupakan kasus prediksi harga dan menggunakan metriks akurasi. Metrik evaluasi yang digunakan pada proyek ini adalah akurasi dan mean squared error (MSE). Akurasi menentukan tingkat kemiripan antara hasil prediksi dengan nilai yang sebenarnya (y_test). Mean squared error (MSE) mengukur error dalam model statistik dengan cara menghitung rata-rata error dari kuadrat hasil aktual dikurang hasil prediksi. Berikut rumus dari MSE:
 
 <div><img src="https://github.com/rizkidwi07/Source/raw/main/Screenshot%202024-12-06%20020439.png") width="450"/></div><br />
 
+Berikut adalah nilai Mean Squared Error (MSE) untuk masing-masing model yang telah dibuat:
+
+<div><img src="https://github.com/rizkidwi07/Source/raw/main/Screenshot%202024-12-10%20223813.png") width="450"/></div><br />
+
 Berikut hasil evaluasi pada proyek ini:
 <div><img src="https://github.com/rizkidwi07/Source/raw/main/Screenshot%202024-12-07%20000115.png") width="450"/></div><br />
 
-Model Random Forest (RF) memberikan nilai eror yang paling kecil. Sedangkan model dengan algoritma KNN memiliki eror yang paling besar. Sehingga model Random Forest (RF) yang akan kita pilih sebagai model terbaik untuk melakukan prediksi harga rumah di Bandung.
+Model Random Forest (RF) memiliki performa terbaik karena menghasilkan MSE (nilai eror) terendah baik pada data train maupun test. Sedangkan model dengan algoritma KNN memiliki eror yang paling besar. Sehingga model Random Forest (RF) yang akan kita pilih sebagai model terbaik untuk melakukan prediksi harga rumah di Bandung.
 
 **Evaluasi Dampak Model Terhadap Business Understanding**
 
