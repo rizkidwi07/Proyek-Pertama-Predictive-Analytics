@@ -93,11 +93,11 @@ Dari hasil fungsi describe(), nilai minimum untuk kolom `bedroom_count`, `bathro
 
   <div><img src="https://github.com/rizkidwi07/Source/blob/main/Screenshot%202024-12-06%20004145.png") width="1000"/></div><br />
 
-  2 sampel missing value pada kolom `land_area` merupakan jumlah yang kecil jika dibandingkan dengan jumlah total sampel yaitu 7.611. Jika 2 sampel ini dihapus, tidak jadi masalah sebab kita masih memiliki 7.611 sampel lainnya. Oleh karena itu, bisa dihapus saja missing value ini.
+  Dua sampel missing value pada kolom `land_area` merupakan jumlah yang kecil jika dibandingkan dengan jumlah total sampel yaitu 7.611. Jika 2 sampel ini dihapus, tidak jadi masalah sebab kita masih memiliki 7.611 sampel lainnya. Oleh karena itu, bisa dihapus saja missing value ini.
 
   <div><img src="https://github.com/rizkidwi07/Source/blob/main/Screenshot%202024-12-06%20004151.png") width="1000"/></div><br />
 
-  1 sampel missing value merupakan pada kolom `building_area` merupakan jumlah yang kecil jika dibandingkan dengan jumlah total sampel yaitu 7.611. Jika 1 sampel ini dihapus, tidak jadi masalah sebab kita masih memiliki 7.611 sampel lainnya. Oleh karena itu, bisa dihapus saja missing value ini.
+  Satu sampel missing value merupakan pada kolom `building_area` merupakan jumlah yang kecil jika dibandingkan dengan jumlah total sampel yaitu 7.611. Jika 1 sampel ini dihapus, tidak jadi masalah sebab kita masih memiliki 7.611 sampel lainnya. Oleh karena itu, bisa dihapus saja missing value ini.
 
   Drop baris yang terdapat nilai 0.
 
