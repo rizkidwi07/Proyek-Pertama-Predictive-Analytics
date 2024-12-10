@@ -99,9 +99,7 @@ Dari hasil fungsi describe(), nilai minimum untuk kolom `bedroom_count`, `bathro
 
   1 sampel missing value merupakan pada kolom `building_area` merupakan jumlah yang kecil jika dibandingkan dengan jumlah total sampel yaitu 7.611. Jika 1 sampel ini dihapus, tidak jadi masalah sebab kita masih memiliki 7.611 sampel lainnya. Oleh karena itu, bisa dihapus saja missing value ini.
 
-  <div><img src="https://github.com/rizkidwi07/Source/blob/main/Screenshot%202024-12-06%20004109.png") width="225"/></div><br />
-
-  Hasil di atas adalah jumlah dari kolom `bedroom_count`, `bathroom_count`, dan `carport_count` yang bernilai 0. Drop baris yang terdapat nilai 0.
+  Drop baris yang terdapat nilai 0.
 
   <div><img src="https://github.com/rizkidwi07/Source/blob/main/Screenshot%202024-12-06%20004214.png") width="225"/></div><br />
 
@@ -117,7 +115,7 @@ Dari hasil fungsi describe(), nilai minimum untuk kolom `bedroom_count`, `bathro
 
 - Menangani Duplikasi Data
 
-  <div><img src="https://github.com/rizkidwi07/Source/raw/main/Screenshot%202024-12-06%20004053.png") width="450"/></div>
+  <div><img src="https://github.com/rizkidwi07/Source/raw/main/Screenshot%202024-12-06%20004053.png") width="250"/></div>
 
   Hapus data pada baris yang memiliki duplikasi data dengan fungsi drop.
 
@@ -204,7 +202,7 @@ Dari hasil fungsi describe(), nilai minimum untuk kolom `bedroom_count`, `bathro
   
   Fitur `installment` memiliki skor korelasi yang sangat tinggi (1), `land_area`, dan `building_area` memiliki skor korelasi yang besar (di atas 0.75) dengan fitur target `price`. Artinya, fitur `price`       berkorelasi tinggi dengan ketiga fitur tersebut. Sementara itu, fitur `bedroom_count`, `bathroom_count` memiliki korelasi normal (0.5). Fitur `carport_count` (0.42) bisa didrop karena kurang berkolerasi.
   
-  <div><img src="https://github.com/rizkidwi07/Source/raw/main/Screenshot%202024-12-06%20014153.png") width="450"/></div><br />
+  <div><img src="https://github.com/rizkidwi07/Source/raw/main/Screenshot%202024-12-06%20014153.png") width="500"/></div><br />
   
   Inilah data yang akan digunakan. Terdapat 3.751 sampel dari 8 kategori (fitur).
 
