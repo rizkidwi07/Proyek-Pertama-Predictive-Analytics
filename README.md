@@ -71,7 +71,7 @@ Usability | 8.82
 - `land_area`: Total luas tanah properti dalam meter persegi.
 - `building_area`: Total luas bangunan properti dalam meter persegi.
 
-**Exploratory Data Analysis**
+### Exploratory Data Analysis
 <div><img src="https://github.com/rizkidwi07/Source/raw/main/Screenshot%202024-12-06%20003443.png") width="450"/></div><br />
 Dari output terlihat bahwa:
 
@@ -79,21 +79,69 @@ Dari output terlihat bahwa:
 - Terdapat missing value di beberapa kolom, diantaranya pada `status`, `land_area`, dan `building_area`.
 - Kolom `price`, `installment`, `land_area`, dan `building_area` bertipe objek, padahal kita akan memprediksi harga yang merupakan kategori numerik. Hal ini harus diubah menjadi numerik dengan tipe data int64.
 
-<div><img src="https://github.com/rizkidwi07/Source/raw/main/Screenshot%202024-12-08%20000546.png") width="225"/></div><br />
-
-- Terdapat 7466 missing value pada kolom `status`
-- Terdapat 2 missing value pada kolom `land_area`
-- Terdapat 1 missing value pada kolom `building_area`
-
-<div><img src="https://github.com/rizkidwi07/Source/raw/main/Screenshot%202024-12-06%20004053.png") width="450"/></div><br />
-
-Terdapat 616 sampel data yang duplikasi.
-
 <div><img src="https://github.com/rizkidwi07/Source/raw/main/Screenshot%202024-12-06%20004100.png") width="450"/></div><br />
 
 Dari hasil fungsi describe(), nilai minimum untuk kolom `bedroom_count`, `bathroom_count`, dan `carport_count` adalah 0. `bedroom_count`, `bathroom_count`, dan `carport_count` adalah jumlah dari kamar tidur, kamar mandi, dan tempat parkir di suatu properti, sehingga tidak mungkin ada properti dengan jumlah kamar tidur, kamar mandi, dan tempat parkir bernilai 0. Cek ada berapa missing value pada ketiga kolom tersebut.
 
 <div><img src="https://github.com/rizkidwi07/Source/raw/main/Screenshot%202024-12-08%20000559.png") width="450"/></div><br />
+
+- Menangani Missing Value
+
+  <div><img src="https://github.com/rizkidwi07/Source/blob/main/Screenshot%202024-12-06%20004131.png") width="225"/></div><br />
+
+  Berdasarkan hasil di atas, dapat diketahui bahwa nilai yang paling dominan dalam kolom `status` ialah "Featured". Nilai inilah yang selanjutnya akan digunakan sebagai pengganti missing value.
+
+  <div><img src="https://github.com/rizkidwi07/Source/blob/main/Screenshot%202024-12-06%20004145.png") width="1000"/></div><br />
+
+  2 sampel missing value pada kolom `land_area` merupakan jumlah yang kecil jika dibandingkan dengan jumlah total sampel yaitu 7.611. Jika 2 sampel ini dihapus, tidak jadi masalah sebab kita masih memiliki 7.611 sampel lainnya. Oleh karena itu, bisa dihapus saja missing value ini.
+
+  <div><img src="https://github.com/rizkidwi07/Source/blob/main/Screenshot%202024-12-06%20004151.png") width="1000"/></div><br />
+
+  1 sampel missing value merupakan pada kolom `building_area` merupakan jumlah yang kecil jika dibandingkan dengan jumlah total sampel yaitu 7.611. Jika 1 sampel ini dihapus, tidak jadi masalah sebab kita masih memiliki 7.611 sampel lainnya. Oleh karena itu, bisa dihapus saja missing value ini.
+
+  <div><img src="https://github.com/rizkidwi07/Source/blob/main/Screenshot%202024-12-06%20004109.png") width="225"/></div><br />
+
+  Hasil di atas adalah jumlah dari kolom `bedroom_count`, `bathroom_count`, dan `carport_count` yang bernilai 0. Drop baris yang terdapat nilai 0.
+
+  <div><img src="https://github.com/rizkidwi07/Source/blob/main/Screenshot%202024-12-06%20004214.png") width="225"/></div><br />
+
+  Missing value sudah diatasi. Jumlah sampel sekarang ada sebanyak 5.233
+
+- Menangani Masalah Tipe Data
+
+  Konversi kolom `price`, `installment`, `land_area`, dan `building_area` ke dalam tipe data int64
+
+  <div><img src="https://github.com/rizkidwi07/Source/blob/main/Screenshot%202024-12-06%20004236.png") width="225"/></div><br />
+
+  Masalah tipe data sudah teratasi. Kolom `price`, `installment`, `land_area`, dan `building_area` sudah dalam tipe data int64
+
+- Menangani Duplikasi Data
+
+  <div><img src="https://github.com/rizkidwi07/Source/raw/main/Screenshot%202024-12-06%20004053.png") width="450"/></div>
+
+  Hapus data pada baris yang memiliki duplikasi data dengan fungsi drop.
+
+  <div><img src="https://github.com/rizkidwi07/Source/blob/main/Screenshot%202024-12-06%20004225.png") width="225"/></div><br />
+
+  Duplikasi data sudah teratasi. Jumlah sampel sekarang ada sebanyak 4.867
+
+- Menangani Masalah Outliers
+
+  <div><img src="https://github.com/rizkidwi07/Source/blob/main/Screenshot%202024-12-06%20011243.png") width="450"/></div><br />
+  <div><img src="https://github.com/rizkidwi07/Source/blob/main/Screenshot%202024-12-06%20011255.png") width="450"/></div><br />
+  <div><img src="https://github.com/rizkidwi07/Source/blob/main/Screenshot%202024-12-06%20011303.png") width="450"/></div><br />
+  <div><img src="https://github.com/rizkidwi07/Source/blob/main/Screenshot%202024-12-06%20011309.png") width="450"/></div><br />
+  <div><img src="https://github.com/rizkidwi07/Source/blob/main/Screenshot%202024-12-06%20011315.png") width="450"/></div><br />
+  <div><img src="https://github.com/rizkidwi07/Source/blob/main/Screenshot%202024-12-06%20011320.png") width="450"/></div><br />
+  <div><img src="https://github.com/rizkidwi07/Source/blob/main/Screenshot%202024-12-06%20011325.png") width="450"/></div><br />
+  
+  Hasil bloxpot dari kolom numerik `price`, `installment`, `bedroom_count`, `bathroom_count`, `carport_count`, `land_area`, `building_area` terdapat beberapa outliers.
+
+  Hapus data pada baris yang memiliki outliers dengan teknik IQR.
+
+  <div><img src="https://github.com/rizkidwi07/Source/blob/main/Screenshot%202024-12-06%20004259.png") width="225"/></div><br />
+
+  Dataset sekarang telah bersih dan memiliki 3.751 sampel.
 
 - Univariate Analysis
 
