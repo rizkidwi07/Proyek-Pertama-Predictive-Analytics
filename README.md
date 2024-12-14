@@ -85,61 +85,6 @@ Dari hasil fungsi describe(), nilai minimum untuk kolom `bedroom_count`, `bathro
 
 <div><img src="https://github.com/rizkidwi07/Source/raw/main/Screenshot%202024-12-08%20000559.png") width="450"/></div><br />
 
-- Menangani Missing Value
-
-  <div><img src="https://github.com/rizkidwi07/Source/blob/main/Screenshot%202024-12-06%20004131.png") width="225"/></div><br />
-
-  Berdasarkan hasil di atas, dapat diketahui bahwa nilai yang paling dominan dalam kolom `status` ialah "Featured". Nilai inilah yang selanjutnya akan digunakan sebagai pengganti missing value.
-
-  <div><img src="https://github.com/rizkidwi07/Source/blob/main/Screenshot%202024-12-06%20004145.png") width="1000"/></div><br />
-
-  Dua sampel missing value pada kolom `land_area` merupakan jumlah yang kecil jika dibandingkan dengan jumlah total sampel yaitu 7.611. Jika 2 sampel ini dihapus, tidak jadi masalah sebab kita masih memiliki 7.611 sampel lainnya. Oleh karena itu, bisa dihapus saja missing value ini.
-
-  <div><img src="https://github.com/rizkidwi07/Source/blob/main/Screenshot%202024-12-06%20004151.png") width="1000"/></div><br />
-
-  Satu sampel missing value merupakan pada kolom `building_area` merupakan jumlah yang kecil jika dibandingkan dengan jumlah total sampel yaitu 7.611. Jika 1 sampel ini dihapus, tidak jadi masalah sebab kita masih memiliki 7.611 sampel lainnya. Oleh karena itu, bisa dihapus saja missing value ini.
-
-  Drop baris yang terdapat nilai 0.
-
-  <div><img src="https://github.com/rizkidwi07/Source/blob/main/Screenshot%202024-12-06%20004214.png") width="225"/></div><br />
-
-  Missing value sudah diatasi. Jumlah sampel sekarang ada sebanyak 5.233
-
-- Menangani Masalah Tipe Data
-
-  Konversi kolom `price`, `installment`, `land_area`, dan `building_area` ke dalam tipe data int64
-
-  <div><img src="https://github.com/rizkidwi07/Source/blob/main/Screenshot%202024-12-06%20004236.png") width="225"/></div><br />
-
-  Masalah tipe data sudah teratasi. Kolom `price`, `installment`, `land_area`, dan `building_area` sudah dalam tipe data int64
-
-- Menangani Duplikasi Data
-
-  <div><img src="https://github.com/rizkidwi07/Source/raw/main/Screenshot%202024-12-06%20004053.png") width="250"/></div>
-
-  Hapus data pada baris yang memiliki duplikasi data dengan fungsi drop.
-
-  <div><img src="https://github.com/rizkidwi07/Source/blob/main/Screenshot%202024-12-06%20004225.png") width="225"/></div><br />
-
-  Duplikasi data sudah teratasi. Jumlah sampel sekarang ada sebanyak 4.867
-
-- Menangani Masalah Outliers
-
-  <div><img src="https://github.com/rizkidwi07/Source/blob/main/Screenshot%202024-12-06%20011243.png") width="450"/></div><br />
-  <div><img src="https://github.com/rizkidwi07/Source/blob/main/Screenshot%202024-12-06%20011255.png") width="450"/></div><br />
-  <div><img src="https://github.com/rizkidwi07/Source/blob/main/Screenshot%202024-12-06%20011303.png") width="450"/></div><br />
-  <div><img src="https://github.com/rizkidwi07/Source/blob/main/Screenshot%202024-12-06%20011309.png") width="450"/></div><br />
-  <div><img src="https://github.com/rizkidwi07/Source/blob/main/Screenshot%202024-12-06%20011315.png") width="450"/></div><br />
-  <div><img src="https://github.com/rizkidwi07/Source/blob/main/Screenshot%202024-12-06%20011320.png") width="450"/></div><br />
-  <div><img src="https://github.com/rizkidwi07/Source/blob/main/Screenshot%202024-12-06%20011325.png") width="450"/></div><br />
-  
-  Hasil bloxpot dari kolom numerik `price`, `installment`, `bedroom_count`, `bathroom_count`, `carport_count`, `land_area`, `building_area` terdapat beberapa outliers.
-
-  Hapus data pada baris yang memiliki outliers dengan teknik IQR.
-
-  <div><img src="https://github.com/rizkidwi07/Source/blob/main/Screenshot%202024-12-06%20004259.png") width="225"/></div><br />
-
-  Dataset sekarang telah bersih dan memiliki 3.751 sampel.
 
 - Univariate Analysis
 
@@ -201,14 +146,26 @@ Dari hasil fungsi describe(), nilai minimum untuk kolom `bedroom_count`, `bathro
   <div><img src="https://github.com/rizkidwi07/Source/raw/main/Screenshot%202024-12-06%20012531.png") width="450"/></div><br />
   
   Fitur `installment` memiliki skor korelasi yang sangat tinggi (1), `land_area`, dan `building_area` memiliki skor korelasi yang besar (di atas 0.75) dengan fitur target `price`. Artinya, fitur `price`       berkorelasi tinggi dengan ketiga fitur tersebut. Sementara itu, fitur `bedroom_count`, `bathroom_count` memiliki korelasi normal (0.5). Fitur `carport_count` (0.42) bisa didrop karena kurang berkolerasi.
-  
-  <div><img src="https://github.com/rizkidwi07/Source/raw/main/Screenshot%202024-12-06%20014153.png") width="500"/></div><br />
-  
-  Inilah data yang akan digunakan. Terdapat 3.751 sampel dari 8 kategori (fitur).
 
 ## Data Preparation
 
 Teknik yang digunakan dalam penyiapan data (Data Preparation) yaitu:
+
+- Menangani Missing Values
+
+  Pada kasus dataset ini ada beberapa kolom dengan missing values yang tidak sedikit dan akan berisiko besar jika sampelnya dihapus. Salah satu teknik yang dapat diterapkan yaitu dengan melakukan imputasi atau nilai pengganti. Pada proyek ini nilai pengganti yang digunakan adalah nilai terbanyak. Ada pula missing values yang sedikit dan missing values tersebut bisa dihapus karena tidak terlalu berpengaruh. Kemudian, dari hasil fungsi describe(), nilai minimum untuk kolom `bedroom_count`, `bathroom_count`, dan `carport_count` adalah 0. Seperti yang diketahui, `bedroom_count`, `bathroom_count`, dan `carport_count` adalah jumlah dari kamar tidur, kamar mandi, dan tempat parkir di suatu properti, sehingga tidak mungkin ada properti dengan jumlah kamar tidur, kamar mandi, dan tempat parkir bernilai 0. Ini merupakan data yang tidak valid atau sering disebut missing value dan bisa dihapus saja.
+  
+- Menangani Duplikasi
+
+  Pada kasus dataset ini ada beberapa baris dengan data duplikasi yang jumlahnya sedikit. Ketika menemukan duplikasi pada data, tentunya data tersebut harus dihilangkan atau dihapus duplikasinya. Karena jumlah duplikasi dan ukuran data masih sedikit, maka bisa dihapus secara manual.
+  
+- Menangani Masalah Tipe Data
+
+  Pada kasus dataset ini, kolom `price`, `installment`, `land_area`, dan `building_area` bertipe objek, padahal kita akan memprediksi harga yang merupakan kategori numerik. Hal ini harus diubah menjadi numerik dengan tipe data int64. Untuk mengatasi masalah ini, akan diganti tipe data pada kolom`price`, `installment`, `land_area`, dan `building_area` menjadi int64. Proses ini dapat dilakukan menggunakan function astype(int64).
+  
+- Menangani Outliers
+
+  Outliers adalah titik data yang berbeda secara signifikan dari pengamatan lainnya sehingga dapat berakibat buruk pada model prediksi. Pada proyek ini menggunakan IQR (InterQuartile Range) untuk mendeteksi outliers. IQR dapat menentukan data outliers yang kondisinya di luar batas bawah atau batas atas dari dataset. IQR dapat divisualkan menggunakan boxplot.
 
 - One-Hot Encoding
   
