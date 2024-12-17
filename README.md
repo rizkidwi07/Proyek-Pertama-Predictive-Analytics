@@ -155,13 +155,13 @@ Teknik yang digunakan dalam penyiapan data (Data Preparation) yaitu:
 
   Pada kasus dataset ini ada beberapa kolom dengan missing values yang tidak sedikit dan akan berisiko besar jika sampelnya dihapus. Salah satu teknik yang dapat diterapkan yaitu dengan melakukan imputasi atau nilai pengganti. Pada proyek ini nilai pengganti yang digunakan adalah nilai terbanyak. Ada pula missing values yang sedikit dan missing values tersebut bisa dihapus karena tidak terlalu berpengaruh. Kemudian, dari hasil fungsi describe(), nilai minimum untuk kolom `bedroom_count`, `bathroom_count`, dan `carport_count` adalah 0. Seperti yang diketahui, `bedroom_count`, `bathroom_count`, dan `carport_count` adalah jumlah dari kamar tidur, kamar mandi, dan tempat parkir di suatu properti, sehingga tidak mungkin ada properti dengan jumlah kamar tidur, kamar mandi, dan tempat parkir bernilai 0. Ini merupakan data yang tidak valid atau sering disebut missing value dan bisa dihapus saja.
   
-- Menangani Duplikasi
-
-  Pada kasus dataset ini ada beberapa baris dengan data duplikasi yang jumlahnya sedikit. Ketika menemukan duplikasi pada data, tentunya data tersebut harus dihilangkan atau dihapus duplikasinya. Karena jumlah duplikasi dan ukuran data masih sedikit, maka bisa dihapus secara manual.
-  
 - Menangani Masalah Tipe Data
 
   Pada kasus dataset ini, kolom `price`, `installment`, `land_area`, dan `building_area` bertipe objek, padahal kita akan memprediksi harga yang merupakan kategori numerik. Hal ini harus diubah menjadi numerik dengan tipe data int64. Untuk mengatasi masalah ini, akan diganti tipe data pada kolom`price`, `installment`, `land_area`, dan `building_area` menjadi int64. Proses ini dapat dilakukan menggunakan function astype(int64).
+
+- Menangani Duplikasi
+
+  Pada kasus dataset ini ada beberapa baris dengan data duplikasi yang jumlahnya sedikit. Ketika menemukan duplikasi pada data, tentunya data tersebut harus dihilangkan atau dihapus duplikasinya. Karena jumlah duplikasi dan ukuran data masih sedikit, maka bisa dihapus secara manual.
   
 - Menangani Outliers
 
